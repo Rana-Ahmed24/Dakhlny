@@ -4,8 +4,8 @@ import {
   SiteFooter,
   StickyMobileCTA,
 } from "@/components/layout/page-shell";
+import { CinematicHero } from "@/components/landing/cinematic-hero";
 import {
-  LandingHero,
   HowItWorks,
   TrustSection,
   FAQSection,
@@ -14,10 +14,10 @@ import { VillageCarousel } from "@/components/landing/village-carousel";
 
 export default function HomePage() {
   return (
-    <PageShell dark>
-      <SiteHeader dark />
-      <main className="pb-28 sm:pb-0">
-        <LandingHero />
+    <PageShell dark className="bg-[#0a0f14]">
+      <SiteHeader dark overlay />
+      <main>
+        <CinematicHero />
         <VillageCarousel />
         <HowItWorks />
         <TrustSection />

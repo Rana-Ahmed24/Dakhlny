@@ -1,6 +1,8 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Shield, Phone, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { SECTION_IMAGES } from "@/lib/visual-assets";
 
 const steps = [
   {
@@ -63,78 +65,50 @@ const faqs = [
   },
 ];
 
-export function LandingHero() {
-  return (
-    <section className="relative min-h-[92vh] overflow-hidden luxury-gradient text-white">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(94,180,212,0.18),transparent)]" />
-      <div className="absolute -right-24 top-32 h-72 w-72 rounded-full bg-ocean-glow/10 blur-[100px]" />
-      <div className="absolute -left-16 bottom-20 h-56 w-56 rounded-full bg-sand/10 blur-[80px]" />
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-cream to-transparent" />
-
-      <div className="relative mx-auto flex min-h-[92vh] max-w-6xl flex-col justify-center px-4 pb-28 pt-24 sm:px-6 sm:pb-32">
-        <p className="animate-fade-in-up text-xs font-semibold uppercase tracking-[0.3em] text-sand-light/90">
-          North Coast Egypt
-        </p>
-        <h1 className="animate-fade-in-up mt-6 max-w-[14ch] font-display text-[2.75rem] font-light leading-[1.05] tracking-tight sm:max-w-none sm:text-6xl lg:text-7xl">
-          Luxury access,
-          <span className="mt-1 block text-sand-light">personally arranged</span>
-        </h1>
-        <p className="animate-fade-in-delay mt-8 max-w-md text-base leading-relaxed text-white/65 sm:text-lg">
-          Dakhlny coordinates guest access to Egypt&apos;s most exclusive coastal
-          villages — with the care of a private concierge.
-        </p>
-
-        <div className="animate-fade-in-delay mt-12 hidden flex-wrap gap-4 sm:flex">
-          <Button asChild size="xl" variant="sand">
-            <Link href="/request-access">
-              Request Access
-              <ArrowRight />
-            </Link>
-          </Button>
-          <Button asChild size="xl" variant="luxury">
-            <Link href="/become-provider">Become a Provider</Link>
-          </Button>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 export function HowItWorks() {
   return (
-    <section id="how-it-works" className="bg-cream px-4 py-20 sm:px-6 sm:py-28">
-      <div className="mx-auto max-w-6xl">
-        <div className="max-w-xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-ocean">
-            The experience
-          </p>
-          <h2 className="mt-3 font-display text-4xl font-light tracking-tight text-navy sm:text-5xl">
-            How it works
-          </h2>
-          <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-            Simple, fast, and personal — no automated matching or complicated
-            systems.
-          </p>
+    <section id="how-it-works" className="relative overflow-hidden bg-cream">
+      <div className="mx-auto max-w-6xl lg:grid lg:grid-cols-2 lg:gap-0">
+        <div className="relative min-h-[280px] lg:min-h-full">
+          <Image
+            src={SECTION_IMAGES.howItWorks}
+            alt="Golden hour on the beach"
+            fill
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-cream via-transparent to-[#071018]/30 lg:bg-gradient-to-r lg:from-transparent lg:to-cream" />
         </div>
 
-        <div className="mt-14 grid gap-5 sm:grid-cols-3 sm:gap-6">
-          {steps.map((item, i) => (
-            <div
-              key={item.step}
-              className="group rounded-[1.75rem] border border-white/80 bg-white p-7 shadow-[0_16px_48px_rgba(7,16,24,0.05)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_24px_60px_rgba(7,16,24,0.08)]"
-              style={{ animationDelay: `${i * 0.1}s` }}
-            >
-              <span className="font-display text-4xl font-light text-ocean/25">
-                {item.step}
-              </span>
-              <h3 className="mt-5 font-display text-2xl font-light text-navy">
-                {item.title}
-              </h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                {item.description}
-              </p>
-            </div>
-          ))}
+        <div className="px-4 py-16 sm:px-8 sm:py-24 lg:py-28">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-ocean">
+            The experience
+          </p>
+          <h2 className="mt-4 font-display text-4xl font-light tracking-tight text-navy sm:text-5xl">
+            Effortless access
+          </h2>
+          <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground">
+            Like a private concierge — we handle the details so you only enjoy
+            the summer.
+          </p>
+
+          <div className="mt-12 space-y-8">
+            {steps.map((item) => (
+              <div key={item.step} className="flex gap-5 border-l border-sand pl-6">
+                <span className="font-display text-3xl font-light leading-none text-ocean/30">
+                  {item.step}
+                </span>
+                <div>
+                  <h3 className="font-display text-xl font-light text-navy">
+                    {item.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                    {item.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -143,14 +117,24 @@ export function HowItWorks() {
 
 export function TrustSection() {
   return (
-    <section className="px-4 py-20 sm:px-6 sm:py-28">
-      <div className="mx-auto max-w-6xl">
+    <section className="relative min-h-[520px] overflow-hidden py-20 sm:py-28">
+      <Image
+        src={SECTION_IMAGES.trust}
+        alt="Aerial Mediterranean coastline"
+        fill
+        sizes="100vw"
+        className="object-cover"
+      />
+      <div className="absolute inset-0 bg-[#071018]/82" />
+      <div className="film-grain pointer-events-none absolute inset-0 opacity-25" />
+
+      <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6">
         <div className="max-w-xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-ocean">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-sand-light/80">
             Why Dakhlny
           </p>
-          <h2 className="mt-3 font-display text-4xl font-light tracking-tight text-navy sm:text-5xl">
-            Why trust us
+          <h2 className="mt-4 font-display text-4xl font-light tracking-tight text-white sm:text-5xl">
+            White-glove coordination
           </h2>
         </div>
 
@@ -158,15 +142,15 @@ export function TrustSection() {
           {trustPoints.map((point) => (
             <div
               key={point.title}
-              className="rounded-[1.75rem] border border-border/50 bg-white/70 p-7 backdrop-blur-sm"
+              className="rounded-2xl border border-white/10 bg-white/[0.06] p-7 backdrop-blur-md transition-colors hover:bg-white/[0.1]"
             >
-              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-sand-muted">
-                <point.icon className="h-5 w-5 text-ocean" strokeWidth={1.5} />
+              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-white/10">
+                <point.icon className="h-5 w-5 text-sand-light" strokeWidth={1.5} />
               </div>
-              <h3 className="font-display text-xl font-light text-navy">
+              <h3 className="font-display text-xl font-light text-white">
                 {point.title}
               </h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+              <p className="mt-3 text-sm leading-relaxed text-white/60">
                 {point.description}
               </p>
             </div>
@@ -179,14 +163,24 @@ export function TrustSection() {
 
 export function FAQSection() {
   return (
-    <section id="faq" className="luxury-gradient px-4 py-20 text-white sm:px-6 sm:py-28">
-      <div className="mx-auto max-w-3xl">
+    <section id="faq" className="relative overflow-hidden py-20 sm:py-28">
+      <Image
+        src={SECTION_IMAGES.faq}
+        alt="Coastal evening atmosphere"
+        fill
+        sizes="100vw"
+        className="object-cover"
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#071018]/90 via-[#0c1829]/88 to-[#071018]/95" />
+      <div className="film-grain pointer-events-none absolute inset-0 opacity-20" />
+
+      <div className="relative z-10 mx-auto max-w-3xl px-4 sm:px-6">
         <div className="text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-sand-light/80">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-sand-light/70">
             FAQ
           </p>
-          <h2 className="mt-3 font-display text-4xl font-light tracking-tight sm:text-5xl">
-            Common questions
+          <h2 className="mt-4 font-display text-4xl font-light tracking-tight text-white sm:text-5xl">
+            Before you arrive
           </h2>
         </div>
 
@@ -194,14 +188,23 @@ export function FAQSection() {
           {faqs.map((faq) => (
             <details
               key={faq.q}
-              className="group rounded-2xl border border-white/10 bg-white/[0.04] px-6 py-5 backdrop-blur-sm transition-colors open:bg-white/[0.07]"
+              className="group rounded-2xl border border-white/10 bg-black/20 px-6 py-5 backdrop-blur-md open:border-sand/20 open:bg-black/30"
             >
-              <summary className="cursor-pointer list-none font-medium tracking-tight marker:hidden [&::-webkit-details-marker]:hidden">
+              <summary className="cursor-pointer list-none font-medium tracking-tight text-white marker:hidden [&::-webkit-details-marker]:hidden">
                 {faq.q}
               </summary>
-              <p className="mt-3 text-sm leading-relaxed text-white/60">{faq.a}</p>
+              <p className="mt-3 text-sm leading-relaxed text-white/55">{faq.a}</p>
             </details>
           ))}
+        </div>
+
+        <div className="mt-14 text-center">
+          <Button asChild size="lg" variant="sand">
+            <Link href="/request-access">
+              Start your summer
+              <ArrowRight />
+            </Link>
+          </Button>
         </div>
       </div>
     </section>
