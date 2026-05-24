@@ -77,12 +77,14 @@ export function AdminDashboard() {
   const pendingApps = applications.filter((a) => a.status === "pending").length;
 
   return (
-    <div className="min-h-screen bg-muted/30">
-      <header className="sticky top-0 z-40 border-b border-border bg-white/95 backdrop-blur-md">
-        <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 sm:px-6">
+    <div className="min-h-screen bg-cream">
+      <header className="sticky top-0 z-40 border-b border-white/60 glass-light">
+        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
           <div>
-            <h1 className="text-lg font-bold text-navy">Admin Dashboard</h1>
-            <p className="text-xs text-muted-foreground">
+            <h1 className="font-display text-2xl font-light text-navy">
+              Admin Dashboard
+            </h1>
+            <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
               Dakhlny Operations
             </p>
           </div>

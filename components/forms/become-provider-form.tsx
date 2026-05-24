@@ -54,18 +54,18 @@ export function BecomeProviderForm() {
 
   if (success) {
     return (
-      <div className="animate-fade-in rounded-2xl border border-emerald-200 bg-emerald-50 p-8 text-center">
-        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100">
-          <CheckCircle2 className="h-8 w-8 text-emerald-600" />
+      <div className="animate-fade-in rounded-[1.75rem] border border-ocean/20 bg-gradient-to-b from-white to-sand-muted/30 p-10 text-center">
+        <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-ocean/10">
+          <CheckCircle2 className="h-8 w-8 text-ocean" strokeWidth={1.5} />
         </div>
-        <h2 className="text-2xl font-semibold text-emerald-900">
+        <h2 className="font-display text-3xl font-light text-navy">
           Application Submitted
         </h2>
-        <p className="mt-3 text-emerald-700">
+        <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
           Our team will review your application and contact you via phone or
           WhatsApp.
         </p>
-        <Button asChild variant="outline" className="mt-6">
+        <Button asChild variant="outline" className="mt-8">
           <Link href="/">Back to Home</Link>
         </Button>
       </div>
@@ -120,7 +120,7 @@ export function BecomeProviderForm() {
           {SUPPORTED_VILLAGES.map((village) => (
             <label
               key={village}
-              className="flex cursor-pointer items-center gap-2 rounded-lg border border-border bg-white p-3 text-sm transition-colors has-[:checked]:border-primary has-[:checked]:bg-primary/5"
+              className="flex cursor-pointer items-center gap-2.5 rounded-2xl border border-border/80 bg-white/80 p-3.5 text-sm transition-all duration-200 has-[:checked]:border-ocean/40 has-[:checked]:bg-ocean/5 has-[:checked]:shadow-sm"
             >
               <Checkbox
                 checked={selectedVillages.includes(village)}
@@ -140,7 +140,7 @@ export function BecomeProviderForm() {
           {ACCESS_TYPES.map((type) => (
             <label
               key={type}
-              className="flex cursor-pointer items-center gap-2 rounded-lg border border-border bg-white p-3 text-sm transition-colors has-[:checked]:border-primary has-[:checked]:bg-primary/5"
+              className="flex cursor-pointer items-center gap-2.5 rounded-2xl border border-border/80 bg-white/80 p-3.5 text-sm transition-all duration-200 has-[:checked]:border-ocean/40 has-[:checked]:bg-ocean/5 has-[:checked]:shadow-sm"
             >
               <Checkbox
                 checked={selectedAccessTypes.includes(type)}

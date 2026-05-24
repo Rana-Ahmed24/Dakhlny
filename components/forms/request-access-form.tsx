@@ -53,18 +53,18 @@ export function RequestAccessForm() {
 
   if (success) {
     return (
-      <div className="animate-fade-in rounded-2xl border border-emerald-200 bg-emerald-50 p-8 text-center">
-        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100">
-          <CheckCircle2 className="h-8 w-8 text-emerald-600" />
+      <div className="animate-fade-in rounded-[1.75rem] border border-ocean/20 bg-gradient-to-b from-white to-sand-muted/30 p-10 text-center">
+        <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-ocean/10">
+          <CheckCircle2 className="h-8 w-8 text-ocean" strokeWidth={1.5} />
         </div>
-        <h2 className="text-2xl font-semibold text-emerald-900">
+        <h2 className="font-display text-3xl font-light text-navy">
           Request Submitted
         </h2>
-        <p className="mt-3 text-emerald-700">
+        <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
           Our team will contact you shortly via phone or WhatsApp to coordinate
           your access.
         </p>
-        <Button asChild variant="outline" className="mt-6">
+        <Button asChild variant="outline" className="mt-8">
           <Link href="/">Back to Home</Link>
         </Button>
       </div>
@@ -72,14 +72,14 @@ export function RequestAccessForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5">
+    <form onSubmit={handleSubmit} className="space-y-6">
       {error ? (
-        <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+        <div className="rounded-2xl border border-red-200/80 bg-red-50/80 px-4 py-3 text-sm text-red-700">
           {error}
         </div>
       ) : null}
 
-      <div className="space-y-2">
+      <div className="space-y-2.5">
         <Label htmlFor="full_name">Full name</Label>
         <Input
           id="full_name"
@@ -91,7 +91,7 @@ export function RequestAccessForm() {
       </div>
 
       <div className="grid gap-5 sm:grid-cols-2">
-        <div className="space-y-2">
+        <div className="space-y-2.5">
           <Label htmlFor="phone">Phone number</Label>
           <Input
             id="phone"
@@ -102,7 +102,7 @@ export function RequestAccessForm() {
             autoComplete="tel"
           />
         </div>
-        <div className="space-y-2">
+        <div className="space-y-2.5">
           <Label htmlFor="whatsapp">WhatsApp number</Label>
           <Input
             id="whatsapp"
@@ -114,7 +114,7 @@ export function RequestAccessForm() {
         </div>
       </div>
 
-      <div className="space-y-2">
+      <div className="space-y-2.5">
         <Label htmlFor="village">Village</Label>
         <Select value={village} onValueChange={setVillage} required>
           <SelectTrigger id="village">
@@ -131,7 +131,7 @@ export function RequestAccessForm() {
       </div>
 
       <div className="grid gap-5 sm:grid-cols-2">
-        <div className="space-y-2">
+        <div className="space-y-2.5">
           <Label htmlFor="access_date">Access date</Label>
           <Input
             id="access_date"
@@ -141,7 +141,7 @@ export function RequestAccessForm() {
             min={new Date().toISOString().split("T")[0]}
           />
         </div>
-        <div className="space-y-2">
+        <div className="space-y-2.5">
           <Label htmlFor="people_count">Number of people</Label>
           <Input
             id="people_count"
@@ -155,18 +155,21 @@ export function RequestAccessForm() {
         </div>
       </div>
 
-      <div className="flex items-center gap-3 rounded-xl border border-border bg-muted/30 p-4">
+      <div className="flex items-center gap-3 rounded-2xl border border-border/80 bg-sand-muted/40 p-4">
         <Checkbox
           id="car_access"
           checked={carAccess}
           onCheckedChange={(checked) => setCarAccess(checked === true)}
         />
-        <Label htmlFor="car_access" className="cursor-pointer font-normal">
+        <Label
+          htmlFor="car_access"
+          className="cursor-pointer normal-case tracking-normal text-foreground"
+        >
           Car access needed
         </Label>
       </div>
 
-      <div className="space-y-2">
+      <div className="space-y-2.5">
         <Label htmlFor="notes">Notes (optional)</Label>
         <Textarea
           id="notes"

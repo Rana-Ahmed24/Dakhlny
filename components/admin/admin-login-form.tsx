@@ -32,12 +32,13 @@ export function AdminLoginForm() {
   }
 
   return (
-    <Card className="w-full max-w-md border-border/60 shadow-xl">
+    <Card className="relative w-full max-w-md overflow-hidden border-white/80 bg-white/90 shadow-[0_24px_80px_rgba(7,16,24,0.12)] backdrop-blur-sm">
+      <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-ocean via-ocean-light to-sand" />
       <CardHeader className="text-center">
-        <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-navy">
-          <Lock className="h-6 w-6 text-white" />
+        <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-navy shadow-[0_12px_40px_rgba(7,16,24,0.2)]">
+          <Lock className="h-6 w-6 text-sand-light" strokeWidth={1.5} />
         </div>
-        <CardTitle className="text-2xl">Admin Login</CardTitle>
+        <CardTitle>Admin Login</CardTitle>
         <p className="text-sm text-muted-foreground">
           Enter your admin password to access the dashboard.
         </p>

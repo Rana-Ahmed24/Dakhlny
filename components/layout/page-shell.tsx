@@ -13,7 +13,7 @@ export function PageShell({ children, className, dark = false }: PageShellProps)
     <div
       className={cn(
         "relative min-h-screen",
-        dark ? "bg-navy text-white" : "bg-background text-foreground",
+        dark ? "bg-navy text-white" : "bg-cream text-foreground",
         className
       )}
     >
@@ -26,59 +26,52 @@ export function SiteHeader({ dark = false }: { dark?: boolean }) {
   return (
     <header
       className={cn(
-        "sticky top-0 z-40 border-b backdrop-blur-md",
+        "sticky top-0 z-40 border-b transition-colors duration-300",
         dark
-          ? "border-white/10 bg-navy/90"
-          : "border-border/50 bg-background/90"
+          ? "glass-dark border-white/10"
+          : "glass-light border-white/40"
       )}
     >
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
-        <Link href="/" className="flex items-center gap-2">
+      <div className="mx-auto flex h-[4.25rem] max-w-6xl items-center justify-between px-4 sm:h-[4.5rem] sm:px-6">
+        <Link href="/" className="group flex items-center gap-3">
           <div
             className={cn(
-              "flex h-9 w-9 items-center justify-center rounded-full text-sm font-bold",
-              dark ? "bg-ocean-light text-white" : "bg-ocean/15 text-ocean-light"
+              "flex h-10 w-10 items-center justify-center rounded-full text-sm font-semibold transition-transform duration-300 group-active:scale-95",
+              dark
+                ? "bg-white/10 text-sand-light ring-1 ring-white/20"
+                : "bg-navy text-white shadow-[0_8px_24px_rgba(7,16,24,0.15)]"
             )}
           >
             D
           </div>
           <span
             className={cn(
-              "text-lg font-semibold tracking-tight",
-              dark ? "text-sand-light" : "text-ocean-light"
+              "font-display text-2xl font-light tracking-wide transition-colors",
+              dark ? "text-sand-light" : "text-navy"
             )}
           >
             {SITE_NAME}
           </span>
         </Link>
-        <nav className="hidden items-center gap-6 text-sm font-medium sm:flex">
-          <Link
-            href="/#how-it-works"
-            className={cn(
-              "transition-colors hover:text-primary",
-              dark ? "text-white/80" : "text-muted-foreground"
-            )}
-          >
-            How it works
-          </Link>
-          <Link
-            href="/#villages"
-            className={cn(
-              "transition-colors hover:text-primary",
-              dark ? "text-white/80" : "text-muted-foreground"
-            )}
-          >
-            Villages
-          </Link>
-          <Link
-            href="/#faq"
-            className={cn(
-              "transition-colors hover:text-primary",
-              dark ? "text-white/80" : "text-muted-foreground"
-            )}
-          >
-            FAQ
-          </Link>
+        <nav className="hidden items-center gap-8 text-xs font-semibold uppercase tracking-[0.15em] sm:flex">
+          {[
+            { href: "/#how-it-works", label: "How it works" },
+            { href: "/#villages", label: "Villages" },
+            { href: "/#faq", label: "FAQ" },
+          ].map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={cn(
+                "transition-colors duration-200",
+                dark
+                  ? "text-white/60 hover:text-sand-light"
+                  : "text-muted-foreground hover:text-ocean"
+              )}
+            >
+              {item.label}
+            </Link>
+          ))}
         </nav>
       </div>
     </header>
@@ -87,46 +80,57 @@ export function SiteHeader({ dark = false }: { dark?: boolean }) {
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-border/50 bg-navy text-white">
-      <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
-        <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between">
+    <footer className="luxury-gradient border-t border-white/10 text-white">
+      <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+        <div className="flex flex-col gap-10 sm:flex-row sm:items-start sm:justify-between">
           <div>
-            <div className="flex items-center gap-2">
-              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-ocean text-sm font-bold">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-sm font-semibold ring-1 ring-white/20">
                 D
               </div>
-              <span className="text-lg font-semibold">{SITE_NAME}</span>
+              <span className="font-display text-2xl font-light tracking-wide text-sand-light">
+                {SITE_NAME}
+              </span>
             </div>
-            <p className="mt-3 max-w-xs text-sm text-white/60">
+            <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/50">
               Premium guest access coordination for North Coast Egypt.
             </p>
           </div>
-          <div className="grid grid-cols-2 gap-8 text-sm">
+          <div className="grid grid-cols-2 gap-10 text-sm">
             <div>
-              <p className="mb-3 font-semibold text-sand">Quick links</p>
-              <ul className="space-y-2 text-white/60">
+              <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-sand-light/80">
+                Explore
+              </p>
+              <ul className="space-y-3 text-white/50">
                 <li>
-                  <Link href="/request-access" className="hover:text-white">
+                  <Link
+                    href="/request-access"
+                    className="transition-colors hover:text-white"
+                  >
                     Request Access
                   </Link>
                 </li>
                 <li>
-                  <Link href="/become-provider" className="hover:text-white">
+                  <Link
+                    href="/become-provider"
+                    className="transition-colors hover:text-white"
+                  >
                     Become a Provider
                   </Link>
                 </li>
               </ul>
             </div>
             <div>
-              <p className="mb-3 font-semibold text-sand">Support</p>
-              <p className="text-white/60">
-                Our team coordinates every request manually for the best
-                experience.
+              <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-sand-light/80">
+                Support
+              </p>
+              <p className="leading-relaxed text-white/50">
+                Every request is coordinated manually for a seamless experience.
               </p>
             </div>
           </div>
         </div>
-        <div className="mt-10 border-t border-white/10 pt-6 text-center text-xs text-white/40">
+        <div className="mt-12 border-t border-white/10 pt-8 text-center text-xs tracking-wide text-white/35">
           © {new Date().getFullYear()} {SITE_NAME}. All rights reserved.
         </div>
       </div>
@@ -146,18 +150,18 @@ export function StickyMobileCTA({
   secondaryLabel?: string;
 }) {
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-border/50 bg-background/95 p-4 backdrop-blur-md sm:hidden">
-      <div className="flex flex-col gap-2">
+    <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-white/40 bg-cream/90 p-4 pb-[max(1rem,env(safe-area-inset-bottom))] backdrop-blur-xl sm:hidden">
+      <div className="flex flex-col gap-2.5">
         <Link
           href={primaryHref}
-          className="flex h-14 items-center justify-center rounded-2xl bg-navy text-base font-semibold text-white shadow-lg transition-transform active:scale-[0.98]"
+          className="flex h-14 items-center justify-center rounded-full bg-navy text-sm font-semibold uppercase tracking-[0.12em] text-white shadow-[0_12px_40px_rgba(7,16,24,0.3)] transition-transform active:scale-[0.98]"
         >
           {primaryLabel}
         </Link>
         {secondaryHref && secondaryLabel ? (
           <Link
             href={secondaryHref}
-            className="flex h-12 items-center justify-center rounded-xl border-2 border-primary/20 text-sm font-medium text-foreground"
+            className="flex h-12 items-center justify-center rounded-full border border-navy/15 bg-white/80 text-xs font-semibold uppercase tracking-[0.12em] text-navy"
           >
             {secondaryLabel}
           </Link>

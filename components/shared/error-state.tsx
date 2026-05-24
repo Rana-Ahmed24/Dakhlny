@@ -15,16 +15,16 @@ export function ErrorState({
   return (
     <div
       className={cn(
-        "flex flex-col items-center justify-center rounded-2xl border border-red-200 bg-red-50 px-6 py-12 text-center",
+        "flex flex-col items-center justify-center rounded-[1.75rem] border border-red-200/80 bg-red-50/80 px-6 py-16 text-center backdrop-blur-sm",
         className
       )}
       role="alert"
     >
-      <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-red-100">
-        <AlertCircle className="h-6 w-6 text-red-600" />
+      <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-red-100">
+        <AlertCircle className="h-7 w-7 text-red-600" strokeWidth={1.5} />
       </div>
-      <h3 className="text-lg font-semibold text-red-900">{title}</h3>
-      <p className="mt-2 max-w-sm text-sm text-red-700">{message}</p>
+      <h3 className="font-display text-2xl font-light text-red-900">{title}</h3>
+      <p className="mt-3 max-w-sm text-sm leading-relaxed text-red-700">{message}</p>
     </div>
   );
 }

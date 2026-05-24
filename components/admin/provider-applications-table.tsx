@@ -102,7 +102,7 @@ export function ProviderApplicationsTable({
         {applications.map((app) => (
           <div
             key={app.id}
-            className="rounded-xl border border-border bg-card p-4 shadow-sm"
+            className="rounded-[1.25rem] border border-white/80 bg-white p-4 shadow-[0_8px_30px_rgba(7,16,24,0.05)]"
           >
             <div className="flex items-start justify-between">
               <p className="font-semibold">{app.full_name}</p>

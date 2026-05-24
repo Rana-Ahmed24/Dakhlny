@@ -7,19 +7,19 @@ import {
 import {
   LandingHero,
   HowItWorks,
-  VillagesSection,
   TrustSection,
   FAQSection,
 } from "@/components/landing/sections";
+import { VillageCarousel } from "@/components/landing/village-carousel";
 
 export default function HomePage() {
   return (
-    <PageShell>
+    <PageShell dark>
       <SiteHeader dark />
-      <main className="pb-24 sm:pb-0">
+      <main className="pb-28 sm:pb-0">
         <LandingHero />
+        <VillageCarousel />
         <HowItWorks />
-        <VillagesSection />
         <TrustSection />
         <FAQSection />
       </main>
