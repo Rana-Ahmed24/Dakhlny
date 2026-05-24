@@ -2,7 +2,6 @@ import {
   PageShell,
   SiteHeader,
   SiteFooter,
-  StickyMobileCTA,
 } from "@/components/layout/page-shell";
 import { CinematicHero } from "@/components/landing/cinematic-hero";
 import {
@@ -24,12 +23,6 @@ export default function HomePage() {
         <FAQSection />
       </main>
       <SiteFooter />
-      <StickyMobileCTA
-        primaryHref="/request-access"
-        primaryLabel="Request Access"
-        secondaryHref="/become-provider"
-        secondaryLabel="Become a Provider"
-      />
     </PageShell>
   );
 }

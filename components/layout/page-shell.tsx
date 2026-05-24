@@ -148,36 +148,3 @@ export function SiteFooter() {
     </footer>
   );
 }
-
-export function StickyMobileCTA({
-  primaryHref,
-  primaryLabel,
-  secondaryHref,
-  secondaryLabel,
-}: {
-  primaryHref: string;
-  primaryLabel: string;
-  secondaryHref?: string;
-  secondaryLabel?: string;
-}) {
-  return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-white/10 bg-[#0a0f14]/90 p-4 pb-[max(1rem,env(safe-area-inset-bottom))] backdrop-blur-xl sm:hidden">
-      <div className="flex flex-col gap-2.5">
-        <Link
-          href={primaryHref}
-          className="flex h-14 items-center justify-center rounded-full bg-sand text-sm font-semibold uppercase tracking-[0.12em] text-navy shadow-[0_12px_40px_rgba(201,184,150,0.35)] transition-transform active:scale-[0.98]"
-        >
-          {primaryLabel}
-        </Link>
-        {secondaryHref && secondaryLabel ? (
-          <Link
-            href={secondaryHref}
-            className="flex h-12 items-center justify-center rounded-full border border-white/20 bg-white/10 text-xs font-semibold uppercase tracking-[0.12em] text-white backdrop-blur-sm"
-          >
-            {secondaryLabel}
-          </Link>
-        ) : null}
-      </div>
-    </div>
-  );
-}
