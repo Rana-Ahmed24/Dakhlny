@@ -10,14 +10,20 @@ interface BrandLogoProps {
   className?: string;
   imageClassName?: string;
   priority?: boolean;
+  /** Light backdrop so dark navy logo.png reads on dark headers */
+  onDark?: boolean;
 }
 
 const SIZES: Record<
   BrandLogoVariant,
   { width: number; height: number; sizes: string }
 > = {
-  compact: { width: 40, height: 40, sizes: "40px" },
-  presentation: { width: 160, height: 48, sizes: "(max-width: 640px) 120px, 160px" },
+  compact: { width: 44, height: 44, sizes: "44px" },
+  presentation: {
+    width: 200,
+    height: 120,
+    sizes: "(max-width: 640px) 140px, 200px",
+  },
 };
 
 export function BrandLogo({
@@ -25,6 +31,7 @@ export function BrandLogo({
   className,
   imageClassName,
   priority = false,
+  onDark = false,
 }: BrandLogoProps) {
   const src =
     variant === "compact" ? BRAND_LOGO_COMPACT : BRAND_LOGO_PRESENTATION;
@@ -32,7 +39,13 @@ export function BrandLogo({
 
   return (
     <span
-      className={cn("relative inline-flex shrink-0 items-center", className)}
+      className={cn(
+        "relative inline-flex shrink-0 items-center justify-center",
+        variant === "compact" &&
+          onDark &&
+          "rounded-full bg-white/95 p-1 ring-1 ring-white/25 shadow-[0_4px_20px_rgba(0,0,0,0.2)]",
+        className
+      )}
     >
       <Image
         src={src}
@@ -41,6 +54,7 @@ export function BrandLogo({
         height={height}
         sizes={sizes}
         priority={priority}
+        unoptimized
         className={cn("h-full w-full object-contain", imageClassName)}
       />
     </span>

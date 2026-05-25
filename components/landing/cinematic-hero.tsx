@@ -66,10 +66,7 @@ export function CinematicHero() {
       <div className="relative z-10 flex h-full flex-col justify-end px-4 pb-32 pt-28 sm:px-6 sm:pb-36 lg:justify-center lg:pb-28">
         <div className="mx-auto w-full max-w-6xl">
           <div className="animate-fade-in-up mb-6 sm:mb-8">
-            <BrandPresentation
-              priority
-              className="h-8 w-28 opacity-80 sm:h-9 sm:w-32"
-            />
+            <BrandPresentation priority />
           </div>
           <p className="type-eyebrow animate-fade-in-up text-sand-light/90">
             North Coast Egypt · Summer

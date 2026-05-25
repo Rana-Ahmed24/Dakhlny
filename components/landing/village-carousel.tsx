@@ -31,17 +31,17 @@ function DestinationCard({
       />
       <div className="film-grain pointer-events-none absolute inset-0 opacity-20" />
 
-      <div className="relative z-10 flex h-full flex-col justify-between p-6">
-        <p className="type-eyebrow text-[0.6rem] tracking-[0.24em] text-white/55">
-          {village.developer}
-        </p>
+      <div className="relative z-10 flex h-full flex-col justify-end p-6">
         <div>
           <h3
-            className="type-display-lg mt-1 text-white"
+            className="type-display-lg text-white"
             style={{ textShadow: "0 4px 30px rgba(0,0,0,0.5)" }}
           >
             {village.name}
           </h3>
+          <p className="type-eyebrow mt-2 text-[0.6rem] tracking-[0.2em] text-white/55">
+            {village.developer}
+          </p>
           <p className="type-body mt-2 text-white/70">{village.tagline}</p>
           <div
             className="type-eyebrow mt-5 flex items-center gap-1.5 text-[0.625rem] tracking-[0.2em] text-white/80 transition-colors group-hover:text-sand-light"

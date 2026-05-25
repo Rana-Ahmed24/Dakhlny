@@ -20,8 +20,8 @@ export function BrandMark({
       <BrandLogo
         variant="compact"
         priority={priority}
-        className="h-8 w-8 transition-transform duration-300 group-active:scale-95 sm:h-9 sm:w-9"
-        imageClassName="drop-shadow-[0_2px_12px_rgba(0,0,0,0.25)]"
+        onDark={overlay}
+        className="h-9 w-9 sm:h-10 sm:w-10"
       />
       <span
         className={cn(
@@ -35,7 +35,7 @@ export function BrandMark({
   );
 }
 
-/** Footer / hero / onboarding — logo2.jpg */
+/** Footer / hero / onboarding — logo2.jpg (light mark on dark backgrounds) */
 export function BrandPresentation({
   className,
   priority = false,
@@ -47,8 +47,8 @@ export function BrandPresentation({
     <BrandLogo
       variant="presentation"
       priority={priority}
-      className={cn("h-9 w-[7.25rem] sm:h-10 sm:w-32", className)}
-      imageClassName="object-left opacity-90"
+      className={cn("h-14 w-[8.5rem] sm:h-16 sm:w-40", className)}
+      imageClassName="object-contain object-left"
     />
   );
 }
