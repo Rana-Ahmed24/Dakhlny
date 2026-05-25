@@ -15,7 +15,9 @@ function StatCard({
       <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">
         {label}
       </p>
-      <p className="mt-1 font-display text-2xl font-light text-navy">{value}</p>
+      <p className="mt-1 text-xl font-semibold tabular-nums tracking-[-0.02em] text-navy sm:text-2xl">
+        {value}
+      </p>
       {sub ? <p className="mt-0.5 text-xs text-muted-foreground">{sub}</p> : null}
     </div>
   );

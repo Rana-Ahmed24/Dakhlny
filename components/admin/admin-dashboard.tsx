@@ -63,7 +63,7 @@ export function AdminDashboard() {
       <header className="sticky top-0 z-40 border-b border-white/60 glass-light">
         <div className="mx-auto flex h-16 max-w-[1600px] items-center justify-between px-4 sm:px-6">
           <div>
-            <h1 className="font-display text-2xl font-light text-navy">
+            <h1 className="text-xl font-semibold tracking-[-0.02em] text-navy sm:text-2xl">
               Operations
             </h1>
             <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">

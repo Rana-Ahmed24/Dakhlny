@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Lock } from "lucide-react";
+import { BrandLogo } from "@/components/brand/brand-logo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -35,8 +35,8 @@ export function AdminLoginForm() {
     <Card className="relative w-full max-w-md overflow-hidden border-white/80 bg-white/90 shadow-[0_24px_80px_rgba(7,16,24,0.12)] backdrop-blur-sm">
       <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-ocean via-ocean-light to-sand" />
       <CardHeader className="text-center">
-        <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-navy shadow-[0_12px_40px_rgba(7,16,24,0.2)]">
-          <Lock className="h-6 w-6 text-sand-light" strokeWidth={1.5} />
+        <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center">
+          <BrandLogo variant="compact" className="h-12 w-12" />
         </div>
         <CardTitle>Admin Login</CardTitle>
         <p className="text-sm text-muted-foreground">

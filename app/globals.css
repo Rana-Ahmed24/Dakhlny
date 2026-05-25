@@ -27,7 +27,7 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
   --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-display-family), ui-serif, Georgia, serif;
+  --font-display: var(--font-display-family), ui-sans-serif, system-ui, sans-serif;
   --font-mono: ui-monospace, monospace;
 
   --color-navy: #071018;
@@ -81,8 +81,12 @@
     background-color: var(--background);
     color: var(--foreground);
     font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.6;
+    letter-spacing: -0.011em;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
 
   a {
@@ -98,6 +102,74 @@
 
   .text-balance {
     text-wrap: balance;
+  }
+
+  /* Editorial display (Syne) */
+  .type-eyebrow {
+    font-size: 0.625rem;
+    font-weight: 600;
+    letter-spacing: 0.32em;
+    line-height: 1.4;
+    text-transform: uppercase;
+  }
+
+  @media (min-width: 640px) {
+    .type-eyebrow {
+      font-size: 0.6875rem;
+      letter-spacing: 0.28em;
+    }
+  }
+
+  .type-display-hero {
+    font-family: var(--font-display);
+    font-size: clamp(2.875rem, 12vw, 5.75rem);
+    font-weight: 600;
+    line-height: 0.9;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
+  }
+
+  .type-display-xl {
+    font-family: var(--font-display);
+    font-size: clamp(2.125rem, 7vw, 3.5rem);
+    font-weight: 600;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+  }
+
+  .type-display-lg {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+  }
+
+  .type-display-md {
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+
+  .type-body-lead {
+    font-size: clamp(1.0625rem, 2.8vw, 1.1875rem);
+    line-height: 1.65;
+    letter-spacing: -0.014em;
+  }
+
+  .type-body {
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    letter-spacing: -0.012em;
+  }
+
+  @media (min-width: 640px) {
+    .type-body {
+      font-size: 1rem;
+    }
   }
 
   .luxury-gradient {

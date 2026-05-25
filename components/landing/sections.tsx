@@ -81,13 +81,13 @@ export function HowItWorks() {
         </div>
 
         <div className="px-4 py-16 sm:px-8 sm:py-24 lg:py-28">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-ocean">
+          <p className="type-eyebrow text-ocean">
             The experience
           </p>
-          <h2 className="mt-4 font-display text-4xl font-light tracking-tight text-navy sm:text-5xl">
+          <h2 className="type-display-xl mt-5 text-navy">
             Effortless access
           </h2>
-          <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground">
+          <p className="type-body-lead mt-5 max-w-md text-muted-foreground">
             Like a private concierge — we handle the details so you only enjoy
             the summer.
           </p>
@@ -130,10 +130,10 @@ export function TrustSection() {
 
       <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6">
         <div className="max-w-xl">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-sand-light/80">
+          <p className="type-eyebrow text-sand-light/80">
             Why Dakhlny
           </p>
-          <h2 className="mt-4 font-display text-4xl font-light tracking-tight text-white sm:text-5xl">
+          <h2 className="type-display-xl mt-5 text-white">
             White-glove coordination
           </h2>
         </div>
@@ -147,10 +147,10 @@ export function TrustSection() {
               <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-white/10">
                 <point.icon className="h-5 w-5 text-sand-light" strokeWidth={1.5} />
               </div>
-              <h3 className="font-display text-xl font-light text-white">
+              <h3 className="type-display-md text-white">
                 {point.title}
               </h3>
-              <p className="mt-3 text-sm leading-relaxed text-white/60">
+              <p className="type-body mt-3 text-white/60">
                 {point.description}
               </p>
             </div>
@@ -190,10 +190,10 @@ export function FAQSection() {
               key={faq.q}
               className="group rounded-2xl border border-white/10 bg-black/20 px-6 py-5 backdrop-blur-md open:border-sand/20 open:bg-black/30"
             >
-              <summary className="cursor-pointer list-none font-medium tracking-tight text-white marker:hidden [&::-webkit-details-marker]:hidden">
+              <summary className="cursor-pointer list-none text-[0.9375rem] font-semibold tracking-[-0.02em] text-white marker:hidden sm:text-base [&::-webkit-details-marker]:hidden">
                 {faq.q}
               </summary>
-              <p className="mt-3 text-sm leading-relaxed text-white/55">{faq.a}</p>
+              <p className="type-body mt-3 text-white/55">{faq.a}</p>
             </details>
           ))}
         </div>

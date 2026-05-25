@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ChevronDown } from "lucide-react";
+import { BrandPresentation } from "@/components/brand/brand-mark";
 import { Button } from "@/components/ui/button";
 import { HERO_IMAGES } from "@/lib/visual-assets";
 
@@ -64,16 +65,22 @@ export function CinematicHero() {
       {/* Content */}
       <div className="relative z-10 flex h-full flex-col justify-end px-4 pb-32 pt-28 sm:px-6 sm:pb-36 lg:justify-center lg:pb-28">
         <div className="mx-auto w-full max-w-6xl">
-          <p className="animate-fade-in-up text-[11px] font-semibold uppercase tracking-[0.35em] text-sand-light/90">
+          <div className="animate-fade-in-up mb-6 sm:mb-8">
+            <BrandPresentation
+              priority
+              className="h-8 w-28 opacity-80 sm:h-9 sm:w-32"
+            />
+          </div>
+          <p className="type-eyebrow animate-fade-in-up text-sand-light/90">
             North Coast Egypt · Summer
           </p>
-          <h1 className="animate-fade-in-up mt-5 max-w-[12ch] font-display text-[2.85rem] font-light leading-[0.95] tracking-tight text-white sm:max-w-none sm:text-6xl lg:text-[5.25rem]">
+          <h1 className="type-display-hero animate-fade-in-up mt-6 max-w-[11ch] text-white sm:max-w-none">
             Your key to the
-            <span className="mt-2 block bg-gradient-to-r from-sand-light via-white to-sand-light bg-clip-text text-transparent">
+            <span className="mt-1 block bg-gradient-to-r from-sand-light via-white to-sand-light bg-clip-text text-transparent sm:mt-2">
               coast
             </span>
           </h1>
-          <p className="animate-fade-in-delay mt-6 max-w-md text-base leading-relaxed text-white/75 sm:text-lg">
+          <p className="type-body-lead animate-fade-in-delay mt-7 max-w-md text-white/78">
             Yacht clubs. Private beaches. Exclusive villages. Dakhlny arranges
             your access with white-glove coordination.
           </p>
@@ -98,7 +105,7 @@ export function CinematicHero() {
         className="absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2 text-white/50 transition-colors hover:text-sand-light"
         aria-label="Scroll to destinations"
       >
-        <span className="text-[10px] font-semibold uppercase tracking-[0.25em]">
+        <span className="type-eyebrow text-[0.6rem] tracking-[0.3em] text-white/50">
           Explore
         </span>
         <ChevronDown className="h-5 w-5 animate-bounce" />

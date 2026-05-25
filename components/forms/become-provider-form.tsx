@@ -58,10 +58,10 @@ export function BecomeProviderForm() {
         <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-ocean/10">
           <CheckCircle2 className="h-8 w-8 text-ocean" strokeWidth={1.5} />
         </div>
-        <h2 className="font-display text-3xl font-light text-navy">
+        <h2 className="type-display-lg text-navy">
           Application Submitted
         </h2>
-        <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+        <p className="type-body mt-4 text-muted-foreground">
           Our team will review your application and contact you via WhatsApp.
         </p>
         <Button asChild variant="outline" className="mt-8">

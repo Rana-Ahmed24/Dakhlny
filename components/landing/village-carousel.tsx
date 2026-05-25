@@ -32,19 +32,19 @@ function DestinationCard({
       <div className="film-grain pointer-events-none absolute inset-0 opacity-20" />
 
       <div className="relative z-10 flex h-full flex-col justify-between p-6">
-        <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-white/55">
+        <p className="type-eyebrow text-[0.6rem] tracking-[0.24em] text-white/55">
           {village.developer}
         </p>
         <div>
           <h3
-            className="font-display text-3xl font-light tracking-wide text-white"
+            className="type-display-lg mt-1 text-white"
             style={{ textShadow: "0 4px 30px rgba(0,0,0,0.5)" }}
           >
             {village.name}
           </h3>
-          <p className="mt-2 text-sm font-light text-white/70">{village.tagline}</p>
+          <p className="type-body mt-2 text-white/70">{village.tagline}</p>
           <div
-            className="mt-4 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/80 transition-colors group-hover:text-sand-light"
+            className="type-eyebrow mt-5 flex items-center gap-1.5 text-[0.625rem] tracking-[0.2em] text-white/80 transition-colors group-hover:text-sand-light"
           >
             Request access
             <ChevronRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
@@ -65,14 +65,14 @@ export function VillageCarousel() {
 
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
         <div className="max-w-xl">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-ocean-glow/90">
+          <p className="type-eyebrow text-ocean-glow/90">
             Destinations
           </p>
-          <h2 className="mt-4 font-display text-4xl font-light tracking-tight text-white sm:text-5xl">
+          <h2 className="type-display-xl mt-5 text-white">
             The North Coast,
             <span className="block text-sand-light">curated for you</span>
           </h2>
-          <p className="mt-4 text-base leading-relaxed text-white/55">
+          <p className="type-body-lead mt-5 text-white/55">
             Swipe through Egypt&apos;s most exclusive summer addresses — each
             one a private world of sea, sun, and privilege.
           </p>
@@ -98,7 +98,7 @@ export function VillageCarousel() {
         />
       </div>
 
-      <p className="relative mt-8 text-center text-[11px] font-medium uppercase tracking-[0.2em] text-white/40">
+      <p className="type-eyebrow relative mt-8 text-center tracking-[0.22em] text-white/40">
         Swipe to explore →
       </p>
     </section>

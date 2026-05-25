@@ -1,17 +1,18 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, DM_Sans } from "next/font/google";
+import { Syne, Inter } from "next/font/google";
 import { Toaster } from "sonner";
 import "./globals.css";
+import { BRAND_LOGO_COMPACT } from "@/lib/brand";
 import { SITE_NAME, SITE_DESCRIPTION } from "@/lib/constants";
 
-const displayFont = Cormorant_Garamond({
+const syne = Syne({
   variable: "--font-display-family",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800"],
   display: "swap",
 });
 
-const bodyFont = DM_Sans({
+const inter = Inter({
   variable: "--font-body",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
@@ -27,6 +28,11 @@ export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"
   ),
+  icons: {
+    icon: BRAND_LOGO_COMPACT,
+    shortcut: BRAND_LOGO_COMPACT,
+    apple: BRAND_LOGO_COMPACT,
+  },
 };
 
 export default function RootLayout({
@@ -35,10 +41,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" dir="ltr">
-      <body
-        className={`${displayFont.variable} ${bodyFont.variable} font-sans antialiased`}
-      >
+    <html lang="en" dir="ltr" className={`${syne.variable} ${inter.variable}`}>
+      <body className="font-sans antialiased">
         {children}
         <Toaster position="top-center" richColors />
       </body>

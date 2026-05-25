@@ -4,7 +4,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 active:scale-[0.98]",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium tracking-[-0.01em] transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 active:scale-[0.98]",
   {
     variants: {
       variant: {
@@ -19,16 +19,16 @@ const buttonVariants = cva(
         ghost:
           "rounded-full text-navy hover:bg-navy/5",
         link: "text-ocean underline-offset-4 hover:underline",
-        navy: "rounded-full bg-navy text-white shadow-[0_12px_40px_rgba(7,16,24,0.35)] hover:bg-navy-light",
-        sand: "rounded-full bg-sand text-navy shadow-[0_8px_30px_rgba(201,184,150,0.35)] hover:bg-sand-light",
+        navy: "font-display rounded-full bg-navy font-semibold text-white shadow-[0_12px_40px_rgba(7,16,24,0.35)] hover:bg-navy-light",
+        sand: "font-display rounded-full bg-sand font-semibold text-navy shadow-[0_8px_30px_rgba(201,184,150,0.35)] hover:bg-sand-light",
         luxury:
-          "rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-md hover:bg-white/20",
+          "font-display rounded-full border border-white/20 bg-white/10 font-semibold text-white backdrop-blur-md hover:bg-white/20",
       },
       size: {
-        default: "h-11 px-6 py-2 text-sm tracking-wide",
-        sm: "h-9 rounded-full px-4 text-xs tracking-wide",
-        lg: "h-14 rounded-full px-8 text-base tracking-wide",
-        xl: "h-[3.75rem] rounded-full px-10 text-base font-semibold tracking-wide",
+        default: "h-11 px-6 py-2 text-sm",
+        sm: "h-9 rounded-full px-4 text-xs",
+        lg: "font-display h-14 rounded-full px-8 text-[0.9375rem] font-semibold tracking-[-0.02em] sm:text-base",
+        xl: "font-display h-[3.75rem] rounded-full px-10 text-[1rem] font-semibold tracking-[-0.02em] sm:text-[1.0625rem]",
         icon: "h-11 w-11 rounded-full",
       },
     },
