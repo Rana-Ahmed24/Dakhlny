@@ -14,18 +14,6 @@ interface BrandLogoProps {
   onDark?: boolean;
 }
 
-const SIZES: Record<
-  BrandLogoVariant,
-  { width: number; height: number; sizes: string }
-> = {
-  compact: { width: 44, height: 44, sizes: "44px" },
-  presentation: {
-    width: 200,
-    height: 120,
-    sizes: "(max-width: 640px) 140px, 200px",
-  },
-};
-
 export function BrandLogo({
   variant = "compact",
   className,
@@ -33,29 +21,47 @@ export function BrandLogo({
   priority = false,
   onDark = false,
 }: BrandLogoProps) {
-  const src =
-    variant === "compact" ? BRAND_LOGO_COMPACT : BRAND_LOGO_PRESENTATION;
-  const { width, height, sizes } = SIZES[variant];
+  const isCompact = variant === "compact";
+  const src = isCompact ? BRAND_LOGO_COMPACT : BRAND_LOGO_PRESENTATION;
+
+  if (isCompact) {
+    return (
+      <span
+        className={cn(
+          "inline-flex shrink-0 items-center justify-center overflow-hidden",
+          onDark &&
+            "rounded-full bg-white/95 p-0.5 ring-1 ring-white/25 shadow-[0_4px_20px_rgba(0,0,0,0.2)]",
+          className
+        )}
+      >
+        <Image
+          src={src}
+          alt=""
+          width={48}
+          height={48}
+          sizes="(max-width: 639px) 40px, 48px"
+          priority={priority}
+          unoptimized
+          className={cn("size-full object-contain", imageClassName)}
+          aria-hidden
+        />
+      </span>
+    );
+  }
 
   return (
     <span
-      className={cn(
-        "relative inline-flex shrink-0 items-center justify-center",
-        variant === "compact" &&
-          onDark &&
-          "rounded-full bg-white/95 p-1 ring-1 ring-white/25 shadow-[0_4px_20px_rgba(0,0,0,0.2)]",
-        className
-      )}
+      className={cn("inline-flex shrink-0 items-center justify-center", className)}
     >
       <Image
         src={src}
         alt={SITE_NAME}
-        width={width}
-        height={height}
-        sizes={sizes}
+        width={200}
+        height={120}
+        sizes="(max-width: 640px) 140px, 200px"
         priority={priority}
         unoptimized
-        className={cn("h-full w-full object-contain", imageClassName)}
+        className={cn("h-full w-full object-contain object-left", imageClassName)}
       />
     </span>
   );

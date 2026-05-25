@@ -231,11 +231,72 @@
 
   .hero-vignette {
     background: radial-gradient(
-      ellipse 85% 75% at 50% 45%,
+      ellipse 95% 85% at 50% 42%,
       transparent 0%,
-      rgba(7, 16, 24, 0.35) 45%,
+      rgba(12, 24, 41, 0.4) 42%,
+      rgba(7, 16, 24, 0.95) 100%
+    );
+  }
+
+  /* Cinematic hero — navy / ocean grade (not gray) */
+  .hero-photo-primary {
+    filter: brightness(0.62) saturate(1.3) contrast(1.14);
+  }
+
+  .hero-photo-secondary {
+    filter: brightness(0.5) saturate(1.45) contrast(1.1) hue-rotate(-6deg);
+  }
+
+  .hero-navy-depth {
+    background: linear-gradient(
+      180deg,
+      rgba(7, 16, 24, 0.88) 0%,
+      rgba(12, 24, 41, 0.42) 32%,
+      rgba(21, 34, 56, 0.28) 52%,
       rgba(7, 16, 24, 0.92) 100%
     );
+  }
+
+  .hero-ocean-veil {
+    background: linear-gradient(
+      125deg,
+      rgba(7, 16, 24, 0.75) 0%,
+      rgba(26, 95, 122, 0.28) 42%,
+      rgba(12, 24, 41, 0.55) 68%,
+      rgba(7, 16, 24, 0.82) 100%
+    );
+  }
+
+  .hero-ocean-glow {
+    background: radial-gradient(
+      ellipse 80% 60% at 72% 22%,
+      rgba(94, 180, 212, 0.2) 0%,
+      rgba(26, 95, 122, 0.12) 38%,
+      transparent 68%
+    );
+  }
+
+  .hero-coastal-light {
+    background: radial-gradient(
+      ellipse 50% 42% at 8% 48%,
+      rgba(201, 184, 150, 0.16) 0%,
+      rgba(228, 213, 188, 0.07) 40%,
+      transparent 68%
+    );
+  }
+
+  .hero-brand-halo {
+    background: radial-gradient(
+      ellipse 85% 70% at 0% 50%,
+      rgba(26, 95, 122, 0.35) 0%,
+      rgba(12, 24, 41, 0.2) 42%,
+      transparent 72%
+    );
+  }
+
+  .hero-ocean-tint {
+    background-color: rgba(26, 61, 82, 0.22);
+    mix-blend-mode: color;
   }
 
   .film-grain {

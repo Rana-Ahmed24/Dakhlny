@@ -44,7 +44,7 @@ export function SiteHeader({
             )
       )}
     >
-      <div className="mx-auto flex h-[4.25rem] max-w-6xl items-center justify-between px-4 sm:h-[4.5rem] sm:px-6">
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         <BrandMark overlay={overlay || dark} priority={overlay} />
         <nav className="hidden items-center gap-8 text-[0.6875rem] font-semibold uppercase tracking-[0.18em] sm:flex">
           {[
