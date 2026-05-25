@@ -17,6 +17,7 @@ import {
 import { createAccessRequest } from "@/lib/actions/access-requests";
 import { ACCESS_TYPES, SUPPORTED_VILLAGES } from "@/lib/constants";
 import type { AccessType } from "@/lib/constants";
+import { getTodayDateString } from "@/lib/utils";
 
 export function RequestAccessForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -24,6 +25,7 @@ export function RequestAccessForm() {
   const [success, setSuccess] = useState(false);
   const [village, setVillage] = useState("");
   const [accessType, setAccessType] = useState<AccessType>("Guest access");
+  const minAccessDate = getTodayDateString();
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -31,11 +33,18 @@ export function RequestAccessForm() {
     setError(null);
 
     const formData = new FormData(e.currentTarget);
+    const accessDate = formData.get("access_date") as string;
+    if (accessDate < minAccessDate) {
+      setError("Access date cannot be before today.");
+      setIsSubmitting(false);
+      return;
+    }
+
     const result = await createAccessRequest({
       full_name: formData.get("full_name") as string,
       phone: formData.get("phone") as string,
       village,
-      access_date: formData.get("access_date") as string,
+      access_date: accessDate,
       access_type: accessType,
       people_count: Number(formData.get("people_count")),
       customer_notes: (formData.get("customer_notes") as string) || undefined,
@@ -144,7 +153,7 @@ export function RequestAccessForm() {
             name="access_date"
             type="date"
             required
-            min={new Date().toISOString().split("T")[0]}
+            min={minAccessDate}
           />
         </div>
         <div className="space-y-2.5">

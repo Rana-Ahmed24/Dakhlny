@@ -5,6 +5,7 @@ import { logFieldChanges, logAuditEvent } from "@/lib/actions/audit";
 import { createTransactionLog } from "@/lib/actions/transactions";
 import { ADMIN_ACTOR } from "@/lib/constants";
 import { calcPlatformProfit } from "@/lib/operations/access-request-ops";
+import { isDateBeforeToday } from "@/lib/utils";
 import { computeReliabilityScore } from "@/lib/operations/analytics";
 import type {
   ActionResult,
@@ -82,6 +83,9 @@ function validateAccessRequest(
   if (!input.phone.trim()) return "Phone number is required.";
   if (!input.village.trim()) return "Village is required.";
   if (!input.access_date) return "Access date is required.";
+  if (isDateBeforeToday(input.access_date)) {
+    return "Access date cannot be before today.";
+  }
   if (input.people_count < 1) return "Number of people must be at least 1.";
   if (!input.access_type) return "Access type is required.";
   return null;
