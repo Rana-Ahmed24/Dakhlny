@@ -19,6 +19,10 @@ const badgeVariants = cva(
         rejected: "border-transparent bg-red-100 text-red-800",
         active: "border-transparent bg-emerald-100 text-emerald-800",
         inactive: "border-transparent bg-slate-100 text-slate-600",
+        failed: "border-transparent bg-red-100 text-red-800",
+        paid: "border-transparent bg-emerald-100 text-emerald-800",
+        partial: "border-transparent bg-amber-100 text-amber-800",
+        refunded: "border-transparent bg-slate-100 text-slate-600",
       },
     },
     defaultVariants: {

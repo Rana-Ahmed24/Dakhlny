@@ -35,12 +35,12 @@ export function BecomeProviderForm() {
     const result = await createProviderApplication({
       full_name: formData.get("full_name") as string,
       phone: formData.get("phone") as string,
-      whatsapp: formData.get("whatsapp") as string,
       villages: selectedVillages,
       access_types: selectedAccessTypes,
       average_pricing: (formData.get("average_pricing") as string) || undefined,
-      availability_notes:
-        (formData.get("availability_notes") as string) || undefined,
+      provider_notes: (formData.get("provider_notes") as string) || undefined,
+      available_from: formData.get("available_from") as string,
+      available_to: formData.get("available_to") as string,
     });
 
     setIsSubmitting(false);
@@ -62,8 +62,7 @@ export function BecomeProviderForm() {
           Application Submitted
         </h2>
         <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-          Our team will review your application and contact you via phone or
-          WhatsApp.
+          Our team will review your application and contact you via WhatsApp.
         </p>
         <Button asChild variant="outline" className="mt-8">
           <Link href="/">Back to Home</Link>
@@ -91,27 +90,16 @@ export function BecomeProviderForm() {
         />
       </div>
 
-      <div className="grid gap-5 sm:grid-cols-2">
-        <div className="space-y-2">
-          <Label htmlFor="phone">Phone number</Label>
-          <Input
-            id="phone"
-            name="phone"
-            type="tel"
-            required
-            placeholder="01xxxxxxxxx"
-          />
-        </div>
-        <div className="space-y-2">
-          <Label htmlFor="whatsapp">WhatsApp number</Label>
-          <Input
-            id="whatsapp"
-            name="whatsapp"
-            type="tel"
-            required
-            placeholder="01xxxxxxxxx"
-          />
-        </div>
+      <div className="space-y-2">
+        <Label htmlFor="phone">Phone Number (WhatsApp Preferred)</Label>
+        <Input
+          id="phone"
+          name="phone"
+          type="tel"
+          required
+          placeholder="01xxxxxxxxx"
+          autoComplete="tel"
+        />
       </div>
 
       <div className="space-y-3">
@@ -163,12 +151,33 @@ export function BecomeProviderForm() {
         />
       </div>
 
+      <div className="grid gap-5 sm:grid-cols-2">
+        <div className="space-y-2">
+          <Label htmlFor="available_from">Available from</Label>
+          <Input
+            id="available_from"
+            name="available_from"
+            type="date"
+            required
+          />
+        </div>
+        <div className="space-y-2">
+          <Label htmlFor="available_to">Available to</Label>
+          <Input
+            id="available_to"
+            name="available_to"
+            type="date"
+            required
+          />
+        </div>
+      </div>
+
       <div className="space-y-2">
-        <Label htmlFor="availability_notes">Availability notes</Label>
+        <Label htmlFor="provider_notes">Provider notes (optional)</Label>
         <Textarea
-          id="availability_notes"
-          name="availability_notes"
-          placeholder="Your availability, capacity, special conditions..."
+          id="provider_notes"
+          name="provider_notes"
+          placeholder="Capacity, special conditions, experience..."
           rows={4}
         />
       </div>

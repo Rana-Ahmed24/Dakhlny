@@ -10,54 +10,29 @@ import { ErrorState } from "@/components/shared/error-state";
 import { AccessRequestsTable } from "@/components/admin/access-requests-table";
 import { ProviderApplicationsTable } from "@/components/admin/provider-applications-table";
 import { ProvidersTable } from "@/components/admin/providers-table";
+import { AnalyticsPanel } from "@/components/admin/analytics-panel";
+import { AuditLogsTable } from "@/components/admin/audit-logs-table";
+import { TransactionLogsTable } from "@/components/admin/transaction-logs-table";
 import { logoutAdmin } from "@/lib/actions/admin-auth";
-import { getAccessRequests } from "@/lib/actions/access-requests";
-import { getProviderApplications } from "@/lib/actions/provider-applications";
-import { getProviders } from "@/lib/actions/providers";
-import type {
-  AccessRequestWithProvider,
-  ProviderApplication,
-  Provider,
-} from "@/lib/types";
+import { getAdminDashboardData } from "@/lib/actions/dashboard";
+import type { AdminDashboardData } from "@/lib/types";
 
 export function AdminDashboard() {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [accessRequests, setAccessRequests] = useState<
-    AccessRequestWithProvider[]
-  >([]);
-  const [applications, setApplications] = useState<ProviderApplication[]>([]);
-  const [providers, setProviders] = useState<Provider[]>([]);
+  const [data, setData] = useState<AdminDashboardData | null>(null);
 
   const loadData = useCallback(async () => {
     setLoading(true);
     setError(null);
-
-    const [requestsResult, appsResult, providersResult] = await Promise.all([
-      getAccessRequests(),
-      getProviderApplications(),
-      getProviders(),
-    ]);
-
-    if (
-      !requestsResult.success ||
-      !appsResult.success ||
-      !providersResult.success
-    ) {
-      const errMsg =
-        (!requestsResult.success && requestsResult.error) ||
-        (!appsResult.success && appsResult.error) ||
-        (!providersResult.success && providersResult.error) ||
-        "Failed to load dashboard data";
-      setError(errMsg);
+    const result = await getAdminDashboardData();
+    if (!result.success) {
+      setError(result.error);
       setLoading(false);
       return;
     }
-
-    setAccessRequests(requestsResult.data ?? []);
-    setApplications(appsResult.data ?? []);
-    setProviders(providersResult.data ?? []);
+    setData(result.data ?? null);
     setLoading(false);
   }, []);
 
@@ -71,33 +46,38 @@ export function AdminDashboard() {
     router.refresh();
   }
 
-  const pendingRequests = accessRequests.filter(
-    (r) => r.status === "pending"
-  ).length;
-  const pendingApps = applications.filter((a) => a.status === "pending").length;
+  const pendingRequests =
+    data?.accessRequests.filter((r) => r.status === "pending").length ?? 0;
+  const pendingApps =
+    data?.providerApplications.filter((a) => a.status === "pending").length ?? 0;
+  const urgentRequests =
+    data?.accessRequests.filter(
+      (r) =>
+        r.urgency === "urgent" ||
+        r.urgency === "standing_at_gate" ||
+        r.urgency === "high"
+    ).length ?? 0;
 
   return (
     <div className="min-h-screen bg-cream">
       <header className="sticky top-0 z-40 border-b border-white/60 glass-light">
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
+        <div className="mx-auto flex h-16 max-w-[1600px] items-center justify-between px-4 sm:px-6">
           <div>
             <h1 className="font-display text-2xl font-light text-navy">
-              Admin Dashboard
+              Operations
             </h1>
             <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-              Dakhlny Operations
+              Dakhlny Admin · Audit & Revenue
             </p>
           </div>
           <div className="flex items-center gap-2">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={loadData}
-              disabled={loading}
-            >
-              <RefreshCw
-                className={`h-4 w-4 ${loading ? "animate-spin" : ""}`}
-              />
+            {urgentRequests > 0 ? (
+              <span className="rounded-full bg-orange-500 px-2 py-0.5 text-xs font-bold text-white">
+                {urgentRequests} urgent
+              </span>
+            ) : null}
+            <Button variant="outline" size="sm" onClick={loadData} disabled={loading}>
+              <RefreshCw className={`h-4 w-4 ${loading ? "animate-spin" : ""}`} />
               <span className="hidden sm:inline">Refresh</span>
             </Button>
             <Button variant="ghost" size="sm" onClick={handleLogout}>
@@ -108,53 +88,77 @@ export function AdminDashboard() {
         </div>
       </header>
 
-      <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6">
+      <main className="mx-auto max-w-[1600px] px-4 py-6 sm:px-6">
         {loading ? (
           <LoadingSpinner label="Loading dashboard..." />
         ) : error ? (
           <ErrorState message={error} />
-        ) : (
-          <Tabs defaultValue="requests" className="w-full">
-            <TabsList className="mb-6 grid w-full grid-cols-3">
-              <TabsTrigger value="requests">
-                Requests
-                {pendingRequests > 0 ? (
-                  <span className="ml-1 rounded-full bg-amber-500 px-1.5 py-0.5 text-xs text-white">
-                    {pendingRequests}
-                  </span>
-                ) : null}
-              </TabsTrigger>
-              <TabsTrigger value="applications">
-                Applications
-                {pendingApps > 0 ? (
-                  <span className="ml-1 rounded-full bg-amber-500 px-1.5 py-0.5 text-xs text-white">
-                    {pendingApps}
-                  </span>
-                ) : null}
-              </TabsTrigger>
-              <TabsTrigger value="providers">Providers</TabsTrigger>
-            </TabsList>
+        ) : data ? (
+          <div className="space-y-6">
+            <AnalyticsPanel analytics={data.analytics} />
 
-            <TabsContent value="requests">
-              <AccessRequestsTable
-                requests={accessRequests}
-                providers={providers}
-                onRefresh={loadData}
-              />
-            </TabsContent>
+            <Tabs defaultValue="requests" className="w-full">
+              <TabsList className="mb-4 flex h-auto min-h-10 w-full flex-wrap gap-1">
+                <TabsTrigger value="requests" className="flex-1 min-w-[100px]">
+                  Requests
+                  {pendingRequests > 0 ? (
+                    <span className="ml-1 rounded-full bg-amber-500 px-1.5 text-xs text-white">
+                      {pendingRequests}
+                    </span>
+                  ) : null}
+                </TabsTrigger>
+                <TabsTrigger value="applications" className="flex-1 min-w-[100px]">
+                  Applications
+                  {pendingApps > 0 ? (
+                    <span className="ml-1 rounded-full bg-amber-500 px-1.5 text-xs text-white">
+                      {pendingApps}
+                    </span>
+                  ) : null}
+                </TabsTrigger>
+                <TabsTrigger value="providers" className="flex-1 min-w-[100px]">
+                  Providers
+                </TabsTrigger>
+                <TabsTrigger value="transactions" className="flex-1 min-w-[100px]">
+                  Transactions
+                </TabsTrigger>
+                <TabsTrigger value="audit" className="flex-1 min-w-[100px]">
+                  Audit
+                </TabsTrigger>
+              </TabsList>
 
-            <TabsContent value="applications">
-              <ProviderApplicationsTable
-                applications={applications}
-                onRefresh={loadData}
-              />
-            </TabsContent>
+              <TabsContent value="requests">
+                <AccessRequestsTable
+                  requests={data.accessRequests}
+                  providers={data.providers}
+                  onRefresh={loadData}
+                />
+              </TabsContent>
 
-            <TabsContent value="providers">
-              <ProvidersTable providers={providers} onRefresh={loadData} />
-            </TabsContent>
-          </Tabs>
-        )}
+              <TabsContent value="applications">
+                <ProviderApplicationsTable
+                  applications={data.providerApplications}
+                  onRefresh={loadData}
+                />
+              </TabsContent>
+
+              <TabsContent value="providers">
+                <ProvidersTable
+                  providers={data.providers}
+                  requests={data.accessRequests}
+                  onRefresh={loadData}
+                />
+              </TabsContent>
+
+              <TabsContent value="transactions">
+                <TransactionLogsTable logs={data.transactionLogs} />
+              </TabsContent>
+
+              <TabsContent value="audit">
+                <AuditLogsTable logs={data.auditLogs} />
+              </TabsContent>
+            </Tabs>
+          </div>
+        ) : null}
       </main>
     </div>
   );

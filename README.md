@@ -15,10 +15,11 @@ Production-ready MVP for Dakhlny — a North Coast Egypt guest access coordinati
 - **Landing page** — Premium coastal design with hero, villages, how it works, FAQ
 - **Request Access** — Guest access request form
 - **Become a Provider** — Provider application form
-- **Admin Dashboard** — Password-protected operations panel
-  - Access requests (status, notes, provider assignment)
-  - Provider applications (approve/reject)
-  - Approved providers (activate/deactivate, rating, notes)
+- **Admin Dashboard** — Operations panel with revenue, audit, and analytics
+  - Access requests (filters, urgency, VIP, blacklist, revenue, smart provider assignment)
+  - Provider applications (date-range availability, inline admin notes)
+  - Providers (reliability, earnings, blacklist, availability dates)
+  - Transaction logs and full audit trail
 
 ## Setup
 
@@ -32,7 +33,8 @@ npm install
 
 1. Create a project at [supabase.com](https://supabase.com)
 2. Open **SQL Editor** and run the full script in `supabase/schema.sql`
-3. Copy your project URL and keys from **Settings → API**
+3. If upgrading an existing database, also run `supabase/migrations/002_operational_upgrade.sql` then `supabase/fix-permissions.sql`
+4. Copy your project URL and keys from **Settings → API**
 
 ### 3. Environment variables
 
@@ -93,7 +95,8 @@ lib/
   constants.ts             # Villages, statuses
   types.ts                 # TypeScript types
 supabase/
-  schema.sql               # Database schema
+  schema.sql               # Database schema (new projects)
+  migrations/              # Upgrade scripts for existing DBs
 middleware.ts              # Admin route protection
 ```
 

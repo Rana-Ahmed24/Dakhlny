@@ -9,5 +9,7 @@ GRANT INSERT ON provider_applications TO anon, authenticated;
 GRANT ALL ON access_requests TO service_role;
 GRANT ALL ON provider_applications TO service_role;
 GRANT ALL ON providers TO service_role;
+GRANT ALL ON transaction_logs TO service_role;
+GRANT ALL ON audit_logs TO service_role;
 
 GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO anon, authenticated, service_role;

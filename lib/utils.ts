@@ -41,3 +41,16 @@ export function formatWhatsAppLink(phone: string): string {
 export function joinList(items: string[]): string {
   return items.filter(Boolean).join(", ");
 }
+
+export function formatCurrency(amount: number | null | undefined): string {
+  if (amount == null) return "—";
+  return `${amount.toLocaleString("en-EG", {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 2,
+  })} EGP`;
+}
+
+export function truncateText(text: string | null | undefined, max = 48): string {
+  if (!text) return "—";
+  return text.length > max ? `${text.slice(0, max)}…` : text;
+}

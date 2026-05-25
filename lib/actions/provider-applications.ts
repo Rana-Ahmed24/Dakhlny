@@ -1,6 +1,8 @@
 "use server";
 
 import { createAdminClient } from "@/lib/supabase/client";
+import { logAuditEvent } from "@/lib/actions/audit";
+import { normalizeAccessTypes } from "@/lib/operations/access-request-ops";
 import type {
   ActionResult,
   CreateProviderApplicationInput,
@@ -8,14 +10,37 @@ import type {
   UpdateProviderApplicationInput,
 } from "@/lib/types";
 
+function mapApplication(row: Record<string, unknown>): ProviderApplication {
+  return {
+    id: row.id as string,
+    full_name: row.full_name as string,
+    phone: (row.phone as string) ?? (row.whatsapp as string) ?? "",
+    villages: (row.villages as string[]) ?? [],
+    access_types: normalizeAccessTypes((row.access_types as string[]) ?? []),
+    average_pricing: row.average_pricing as string | null,
+    provider_notes:
+      (row.provider_notes as string | null) ??
+      (row.availability_notes as string | null),
+    available_from: row.available_from as string | null,
+    available_to: row.available_to as string | null,
+    status: row.status as ProviderApplication["status"],
+    admin_notes: row.admin_notes as string | null,
+    created_at: row.created_at as string,
+  };
+}
+
 function validateProviderApplication(
   input: CreateProviderApplicationInput
 ): string | null {
   if (!input.full_name.trim()) return "Full name is required.";
   if (!input.phone.trim()) return "Phone number is required.";
-  if (!input.whatsapp.trim()) return "WhatsApp number is required.";
   if (input.villages.length === 0) return "Select at least one village.";
   if (input.access_types.length === 0) return "Select at least one access type.";
+  if (!input.available_from) return "Availability start date is required.";
+  if (!input.available_to) return "Availability end date is required.";
+  if (input.available_from > input.available_to) {
+    return "Availability end date must be after start date.";
+  }
   return null;
 }
 
@@ -32,11 +57,12 @@ export async function createProviderApplication(
     const { error } = await supabase.from("provider_applications").insert({
       full_name: input.full_name.trim(),
       phone: input.phone.trim(),
-      whatsapp: input.whatsapp.trim(),
       villages: input.villages,
-      access_types: input.access_types,
+      access_types: normalizeAccessTypes(input.access_types),
       average_pricing: input.average_pricing?.trim() || null,
-      availability_notes: input.availability_notes?.trim() || null,
+      provider_notes: input.provider_notes?.trim() || null,
+      available_from: input.available_from,
+      available_to: input.available_to,
       status: "pending",
     });
 
@@ -70,7 +96,12 @@ export async function getProviderApplications(): Promise<
       return { success: false, error: error.message };
     }
 
-    return { success: true, data: data ?? [] };
+    return {
+      success: true,
+      data: (data ?? []).map((r) =>
+        mapApplication(r as Record<string, unknown>)
+      ),
+    };
   } catch {
     return {
       success: false,
@@ -125,14 +156,17 @@ export async function approveProviderApplication(
       return { success: false, error: "Application not found." };
     }
 
+    const mapped = mapApplication(app as Record<string, unknown>);
+
     const { error: insertError } = await supabase.from("providers").insert({
-      full_name: app.full_name,
-      phone: app.phone,
-      whatsapp: app.whatsapp,
-      villages: app.villages,
-      access_types: app.access_types,
-      average_pricing: app.average_pricing,
-      notes: app.availability_notes,
+      full_name: mapped.full_name,
+      phone: mapped.phone,
+      villages: mapped.villages,
+      access_types: mapped.access_types,
+      average_pricing: mapped.average_pricing,
+      provider_notes: mapped.provider_notes,
+      available_from: mapped.available_from,
+      available_to: mapped.available_to,
       status: "active",
     });
 
@@ -148,6 +182,13 @@ export async function approveProviderApplication(
     if (updateError) {
       return { success: false, error: updateError.message };
     }
+
+    await logAuditEvent({
+      entityType: "provider_application",
+      entityId: applicationId,
+      action: "approve_provider_application",
+      newValue: mapped.full_name,
+    });
 
     return { success: true };
   } catch {
